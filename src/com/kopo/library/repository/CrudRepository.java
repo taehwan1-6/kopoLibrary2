@@ -1,11 +1,10 @@
 package com.kopo.library.repository;
 
-import com.kopo.library.domain.Objects;
 
 import java.util.List;
 import java.util.Objects;
 
-public interface CrudRepository {
+public interface CrudRepository<T> {
     // CRUD
     // 삽입
     void insertObjects(Objects objects);
@@ -18,7 +17,7 @@ public interface CrudRepository {
 
 
     // 조회
-    List<Objects> findAllObjects();
+    List<T> findAllObjects();
 
     Objects findById(Long id);
 

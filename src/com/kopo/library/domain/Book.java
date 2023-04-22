@@ -9,6 +9,8 @@ public class Book {
     private String publicationDate;
     private boolean isPossibleBorrow;
 
+    public Book() {}
+
     public Book(Long bookId, String title, String author, String publisher, String publicationDate, boolean isPossibleBorrow) {
         this.bookId = bookId;
         this.title = title;

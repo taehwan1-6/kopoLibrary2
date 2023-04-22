@@ -1,10 +1,14 @@
 package com.kopo.library.view;
 
+import com.kopo.library.domain.Book;
 import com.kopo.library.domain.Member;
 import com.kopo.library.service.MemberService;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class MainView {
@@ -19,7 +23,9 @@ public class MainView {
 
     // Domain
     public static Member prviousMember = new Member();
-//    public static BookVO prviousBook = new BookVO();
+    public static Book book = new Book();
+
+    public static List<Book> books = new ArrayList<>();
 
     // View
     public static MemberView memberView = new MemberView();
