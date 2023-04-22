@@ -26,7 +26,7 @@ public class MemberRepoDbImpl implements MemberRepository {
         String gender = String.valueOf(member.getGender());
         String address = member.getAddress();
         String phoneNumber = member.getPhoneNumber();
-        String birthday = member.getBirthDate();
+        String birthDate = member.getBirthDate();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, name);
@@ -34,7 +34,7 @@ public class MemberRepoDbImpl implements MemberRepository {
 //            preparedStatement.setString(3, member.getAge());
             preparedStatement.setString(3, address);
             preparedStatement.setString(4, phoneNumber);
-            preparedStatement.setString(5, birthday);
+            preparedStatement.setString(5, birthDate);
 //            preparedStatement.setString(7, member.getJoinDate());
 
             preparedStatement.executeUpdate();
@@ -51,7 +51,30 @@ public class MemberRepoDbImpl implements MemberRepository {
 
     @Override
     public void updateMember(Member member) {
+        String query = "UPDATE MEMBER SET NAME = ?, GENDER = ?, ADDRESS = ?, PHONE_NUMBER = ?, BIRTHDATE = ? WHERE ID = ?";
 
+        Long id = member.getId();
+        String name = member.getName();
+        String gender = String.valueOf(member.getGender());
+        String address = member.getAddress();
+        String phoneNumber = member.getPhoneNumber();
+        String birthDate = member.getBirthDate();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, gender);
+            preparedStatement.setString(3, address);
+            preparedStatement.setString(4, phoneNumber);
+            preparedStatement.setString(5, birthDate);
+            preparedStatement.setLong(6, id);
+
+            preparedStatement.executeUpdate();
+            System.out.println("회원 정보 수정이 완료되었습니다.");
+
+        } catch (SQLException e) {
+            System.out.println("SQL Statement or DB Connection Error Occur");
+            e.printStackTrace();
+        }
     }
 
     @Override

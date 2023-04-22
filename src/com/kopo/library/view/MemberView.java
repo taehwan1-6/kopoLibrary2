@@ -10,17 +10,24 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 public class MemberView {
-    Scanner scanner = new Scanner(System.in);
+//    Scanner scanner = new Scanner(System.in);
     // 이거안됨
 //    public static MemberService memberService1 = MainView.memberService;
-    MemberService memberService;
+
 
     public MemberView() {}
 
     public void view() {
-
-        GenderStatus gender;
+        Scanner scanner = MainView.scanner;
+        MemberService memberService = MainView.memberService;
         Member member;
+
+        String name;
+        GenderStatus gender;
+        String address;
+        String phoneNumber;
+        String birthDate;
+
 
         Member deletedMember = null;
         while (true) {
@@ -45,7 +52,7 @@ public class MemberView {
 
                     System.out.println("이름을 입력해주세요");
                     userInput = scanner.nextLine();
-                    String name = userInput;
+                    name = userInput;
 
                     System.out.println("성별을 입력해주세요 \t (입력예시 : MALE or FEMALE or ETC)");
                     userInput = scanner.nextLine();
@@ -57,15 +64,15 @@ public class MemberView {
 
                     System.out.println("주소를 입력해주세요 \t (입력예시 : 인천광역시)");
                     userInput = scanner.nextLine();
-                    String address = userInput;
+                    address = userInput;
 
                     System.out.println("연락처를 입력해주세요 \t (입력예시 : 010-1234-5678)");
                     userInput = scanner.nextLine();
-                    String phoneNumber = userInput;
+                    phoneNumber = userInput;
 
                     System.out.println("생일을 입력해주세요 \t (입력예시 : 1997/09/16)");
                     userInput = scanner.nextLine();
-                    String birthDate = userInput;
+                    birthDate = userInput;
                     // 만약 입력예시처럼 입력하지 않으면 다시입력해달라는 예외처리를 해야함.
                     // 현재는 그냥 아무 String 넣어도 다 들어갈거임
 
@@ -95,15 +102,15 @@ public class MemberView {
                     userInput = scanner.nextLine();
                     gender = GenderStatus.valueOf(userInput);
 
-                    System.out.println("변경될 주소를 입력해주세요 \t (입력예시 : 경기도 광명시 철산동)");
+                    System.out.println("주소를 입력해주세요 \t (입력예시 : 인천광역시)");
                     userInput = scanner.nextLine();
                     address = userInput;
 
-                    System.out.println("변경될 연락처를 입력해주세요 \t (입력예시 : 010-1234-5678)");
+                    System.out.println("연락처를 입력해주세요 \t (입력예시 : 010-1234-5678)");
                     userInput = scanner.nextLine();
                     phoneNumber = userInput;
 
-                    System.out.println("변경될 생일을 입력해주세요 \t (입력예시 : 1996/05/11)");
+                    System.out.println("생일을 입력해주세요 \t (입력예시 : 1997/09/16)");
                     userInput = scanner.nextLine();
                     birthDate = userInput;
                     // 혹시나 아래와 같이 new로 새로 생성했기때문에 -> 기존의 가입날짜가 유지가 안되고 -> new로 인스턴스 생성될때의 가입날짜로 뜬다면

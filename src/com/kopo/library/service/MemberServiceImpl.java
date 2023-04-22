@@ -21,7 +21,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void updateMember(Member member) {
-
+        memberRepository.updateMember(member);
     }
 
     @Override
