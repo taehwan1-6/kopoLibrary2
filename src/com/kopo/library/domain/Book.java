@@ -20,6 +20,21 @@ public class Book {
         this.isPossibleBorrow = isPossibleBorrow;
     }
 
+    public Book(String title, String author, String publisher, String publicationDate, boolean isPossibleBorrow) {
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.publicationDate = publicationDate;
+        this.isPossibleBorrow = isPossibleBorrow;
+    }
+
+    public Book(String title, String author, String publisher, String publicationDate) {
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.publicationDate = publicationDate;
+    }
+
     public Long getBookId() {
         return bookId;
     }

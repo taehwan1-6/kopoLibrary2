@@ -1,5 +1,6 @@
 package com.kopo.library.view;
 
+import com.kopo.library.domain.Book;
 import com.kopo.library.domain.GenderStatus;
 import com.kopo.library.domain.Member;
 import com.kopo.library.service.CrudService;
@@ -15,15 +16,13 @@ public class BookView {
         Scanner scanner = MainView.scanner;
         CrudService bookService = MainView.bookService;
 
-        Member member;
+        Book book = MainView.book;
 
-        String name;
-        GenderStatus gender;
-        String address;
-        String phoneNumber;
-        String birthDate;
-
-        Member deletedMember = null;
+        String title;
+        String author;
+        String publisher;
+        String publicationDate;
+        boolean isPossibleBorrow;
 
         while (true) {
             System.out.println("[0]뒤로 \t [1]도서조회 \t [2]도서등록 \t [3]도서수정 \t [4]도서삭제 \t [5]삭제취소");
@@ -35,30 +34,30 @@ public class BookView {
                 case ("1"): // 도서조회
                     System.out.println(bookService.findAllObjects());
                     break;
-//                case ("2"): // 도서등록
-//                    System.out.println("이름을 입력해주세요");
+                case ("2"): // 도서등록
+                    System.out.println("제목을 입력해주세요");
+                    userInput = scanner.nextLine();
+                    title = userInput;
+
+                    System.out.println("저자를 입력해주세요 \t ");
+                    userInput = scanner.nextLine();
+                    author = userInput;
+
+                    System.out.println("출판사 입력해주세요 \t ");
+                    userInput = scanner.nextLine();
+                    publisher = userInput;
+
+                    System.out.println("출판일을 입력해주세요 \t (입력예시 : yyyy/mm/dd)");
+                    userInput = scanner.nextLine();
+                    publicationDate = userInput;
+
+//                    System.out.println("을 입력해주세요 \t (입력예시 : 1997/09/16)");
 //                    userInput = scanner.nextLine();
-//                    name = userInput;
-//
-//                    System.out.println("성별을 입력해주세요 \t (입력예시 : MALE or FEMALE or ETC)");
-//                    userInput = scanner.nextLine();
-//                    gender = GenderStatus.valueOf(userInput);
-//
-//                    System.out.println("주소를 입력해주세요 \t (입력예시 : 인천광역시)");
-//                    userInput = scanner.nextLine();
-//                    address = userInput;
-//
-//                    System.out.println("연락처를 입력해주세요 \t (입력예시 : 010-1234-5678)");
-//                    userInput = scanner.nextLine();
-//                    phoneNumber = userInput;
-//
-//                    System.out.println("생일을 입력해주세요 \t (입력예시 : 1997/09/16)");
-//                    userInput = scanner.nextLine();
-//                    birthDate = userInput;
-//
-//                    member = new Member(name, gender, address, phoneNumber, birthDate);
-//                    bookService.insertObjects(member);
-//                    break;
+//                    isPossibleBorrow = Boolean.getBoolean(userInpㄱut);
+
+                    MainView.book = new Book(title, author, publisher, publicationDate);
+                    bookService.insertObjects();
+                    break;
 //                case ("3"):
 //                    bookService.findAllObjects();
 //                    System.out.println(

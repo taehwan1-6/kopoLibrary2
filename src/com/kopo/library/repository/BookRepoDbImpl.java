@@ -5,10 +5,7 @@ import com.kopo.library.domain.GenderStatus;
 import com.kopo.library.domain.Member;
 import com.kopo.library.view.MainView;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,12 +13,38 @@ import java.util.Objects;
 public class BookRepoDbImpl implements CrudRepository{
 
     Connection connection = MainView.connection;
-//    Book book = MainView.book;
+    Book book = MainView.book;
     List<Book> books = MainView.books;
 
     @Override
-    public void insertObjects(Objects objects) {
+    public void insertObjects() {
 
+        String query = "INSERT INTO BOOK (bookId, title, author, publisher, publicationDate) " +
+                "VALUES (BOOK_ID_SEQ.NEXTVAL, ?, ?, ?, ?)";
+
+        String title = book.getTitle();
+        String author = book.getAuthor();
+        String publisher = book.getPublisher();
+        String publicationDate = book.getPublicationDate();
+//        boolean isPossibleBorrow = book.isPossibleBorrow();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, title);
+            preparedStatement.setString(2, author);
+            preparedStatement.setString(3, publisher);
+            preparedStatement.setString(4, publicationDate);
+//            preparedStatement.setString(5, Boolean.toString(isPossibleBorrow));
+
+            preparedStatement.executeUpdate();
+            System.out.println("도서 등록이 완료되었습니다.");
+
+            connection.commit(); // COMMIT 수행
+
+
+        } catch (SQLException e) {
+            System.out.println("SQL Statement or DB Connection Error Occur");
+            e.printStackTrace();
+        }
     }
 
     @Override

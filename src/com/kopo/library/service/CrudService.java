@@ -7,7 +7,7 @@ import java.util.Objects;
 public interface CrudService<T> {
     // CRUD
     // 삽입
-    void insertObjects(Objects objects);
+    void insertObjects();
 
     // 수정
     void updateObjects(Objects objects);

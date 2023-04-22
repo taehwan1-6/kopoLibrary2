@@ -16,8 +16,8 @@ public class BookServiceImpl implements CrudService{
     }
 
     @Override
-    public void insertObjects(Objects objects) {
-
+    public void insertObjects() {
+        bookRepository.insertObjects();
     }
 
     @Override

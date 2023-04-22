@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Objects;
 
 public interface CrudRepository<T> {
+
     // CRUD
     // 삽입
-    void insertObjects(Objects objects);
+    void insertObjects();
 
     // 수정
     void updateObjects(Objects objects);
