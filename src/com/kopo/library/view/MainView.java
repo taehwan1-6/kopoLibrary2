@@ -10,29 +10,25 @@ import com.kopo.library.service.MemberServiceImpl;
 import com.kopo.library.util.dbconnector.DBConnector;
 
 public class MainView {
+    // Util
     public static Scanner scanner = new Scanner(System.in);
+    public static Connection connection = null;
+
+    // Service
     public static MemberService memberService;
 //    public static BookService bookService;
 //    public static LoanService loanService;
+
+    // Domain
     public static Member prviousMember = new Member();
 //    public static BookVO prviousBook = new BookVO();
-    public static Connection connection = null;
 
-//    MemberView memberView = new MemberView(connection);
+    // View
     public static MemberView memberView = new MemberView();
     public static ModeView modeView = new ModeView();
 
 
     public static void main(String[] args) {
-        String test = "이거가나";
-//        Scanner scanner = new Scanner(System.in);
-
-//        Connection connection = DBConnector.getConnection();
-
-//        MemberView memberView = new MemberView(connection);
-//        BookView bookView = new BookView(connection);
-//        LoanView loanView = new LoanView(connection);
-
         System.out.println(
                 "==================================================================================================");
         System.out.println("도서 대출 관리 프로그램 - 0.2.0 version");
@@ -65,9 +61,9 @@ public class MainView {
                 case ("2"):
 //                    bookView.run();
 //                    break;
-//                case ("3"):
+                case ("3"):
 //                    loanView.run();
-                    break;
+//                    break;
                 case ("4"):
                     System.out.println("프로그램을 종료합니다.");
                     scanner.close();

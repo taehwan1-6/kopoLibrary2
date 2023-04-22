@@ -20,44 +20,7 @@ public class Member {
     public Member() {
     }
 
-    public Member(Long id, String name, GenderStatus gender, String age, String address, String number, String birthDate, String joinDate) {
-        this.id = id;
-        this.name = name;
-        this.gender = gender;
-        this.age = age;
-        this.address = address;
-        this.number = number;
-        this.birthDate = birthDate;
-        this.joinDate = joinDate;
-    }
-
-    public Member(String name) {
-        this(name, GenderStatus.MALE, null, null, "1997/09/16");
-    }
-
-    public Member(Long id, String name, GenderStatus gender, String address, String number, String birthDate) {
-        this.id = id;
-        this.name = name;
-        this.gender = gender;
-        this.age = String.valueOf(Period.between(LocalDate.now(), LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("yyyy/MM/dd")))
-                .getYears() * -1);
-        this.address = address;
-        this.number = number;
-        this.birthDate = birthDate;
-    }
-
-    public Member(Long id, String name, GenderStatus gender, String address, String number, String birthDate, String joinDate) {
-        this.id = id;
-        this.name = name;
-        this.gender = gender;
-        this.age = String.valueOf(Period.between(LocalDate.now(), LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("yyyy/MM/dd")))
-                .getYears() * -1);
-        this.address = address;
-        this.number = number;
-        this.birthDate = birthDate;
-        this.joinDate = joinDate;
-    }
-
+    // 1. Memory 모드 일때
     public Member(String name, GenderStatus gender, String address, String number, String birthDate) {
         this.id = ID_GENERATOR.getAndIncrement();
         this.name = name;
@@ -69,6 +32,31 @@ public class Member {
         this.birthDate = birthDate;
         this.joinDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
     }
+
+    // 1. Memory 모드에서 - Id 사용해서 수정, 삭제 해줄 때
+    public Member(Long id, String name, GenderStatus gender, String address, String number, String birthDate) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.age = String.valueOf(Period.between(LocalDate.now(), LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("yyyy/MM/dd")))
+                .getYears() * -1);
+        this.address = address;
+        this.number = number;
+        this.birthDate = birthDate;
+    }
+
+    // 3. DB 모드일때
+    public Member(Long id, String name, GenderStatus gender, String age, String address, String number, String birthDate, String joinDate) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.address = address;
+        this.number = number;
+        this.birthDate = birthDate;
+        this.joinDate = joinDate;
+    }
+
 
 
 

@@ -8,16 +8,11 @@ import java.sql.Connection;
 import java.util.List;
 
 public class MemberServiceImpl implements MemberService {
-    Connection connection;
     private MemberRepository memberRepository;
 
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
-
-//    public MemberServiceImpl(Connection connection) {
-//        this.connection = connection;
-//    }
 
     @Override
     public void insertMember(Member member) {
@@ -37,8 +32,6 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<Member> findAllMember() {
         return memberRepository.findAllMember();
-
-//        return null;
     }
 
     @Override

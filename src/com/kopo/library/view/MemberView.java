@@ -10,27 +10,10 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 public class MemberView {
-//    private List<Member> members = new ArrayList<>();
-
     Scanner scanner = new Scanner(System.in);
-//    Connection connection;
-//    MemberService memberService = new MemberServiceImpl(connection);
-//    MemberServiceDB memberService = new MemberServiceDB();
-
-//    MemberService memberService = Main.memberService;
-
     MemberService memberService;
 
     public MemberView() {}
-
-//    public MemberView(Connection
-//    connection) {
-//        this.connection = connection;
-//    }
-
-    public MemberView(MemberService memberService) {
-        this.memberService = memberService;
-    }
 
     public void view() {
 

@@ -11,14 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberRepoDbImpl implements MemberRepository {
-//    Connection connection;
 
     public MemberRepoDbImpl() {
     }
-
-//    public MemberRepoDbImpl(Connection connection) {
-//        this.connection = connection;
-//    }
 
     @Override
     public void insertMember(Member member) {
