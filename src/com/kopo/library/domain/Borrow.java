@@ -1,5 +1,8 @@
 package com.kopo.library.domain;
 
+/**
+ * 도서관 도서 대출 및 반납 관리
+ */
 public class Borrow {
 
     private Long borrowId;

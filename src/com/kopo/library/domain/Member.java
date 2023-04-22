@@ -2,6 +2,9 @@ package com.kopo.library.domain;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * 도서관 회원 관리
+ */
 public class Member {
     private static AtomicLong ID_GENERATOR = new AtomicLong(1);
 
