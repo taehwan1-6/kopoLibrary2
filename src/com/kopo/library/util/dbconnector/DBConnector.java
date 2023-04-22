@@ -1,4 +1,4 @@
-package com.kopo.library.dbconnector;
+package com.kopo.library.util.dbconnector;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

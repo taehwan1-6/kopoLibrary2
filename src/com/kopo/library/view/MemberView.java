@@ -4,6 +4,7 @@ import com.kopo.library.domain.GenderStatus;
 import com.kopo.library.domain.Member;
 //import com.kopo.library.repository.MemberRepoImpl;
 import com.kopo.library.service.MemberService;
+import com.kopo.library.service.MemberServiceImpl;
 
 import java.sql.Connection;
 import java.util.Scanner;
@@ -11,21 +12,31 @@ import java.util.Scanner;
 public class MemberView {
 //    private List<Member> members = new ArrayList<>();
 
-    private Connection connection;
+    Scanner scanner = new Scanner(System.in);
+//    Connection connection;
+//    MemberService memberService = new MemberServiceImpl(connection);
+//    MemberServiceDB memberService = new MemberServiceDB();
+
+//    MemberService memberService = Main.memberService;
 
     MemberService memberService;
-//    MemberServiceDB memberService = new MemberServiceDB();
-    GenderStatus gender;
-    Member member;
 
     public MemberView() {}
 
-    public MemberView(Connection connection) {
-        this.connection = connection;
+//    public MemberView(Connection
+//    connection) {
+//        this.connection = connection;
+//    }
+
+    public MemberView(MemberService memberService) {
+        this.memberService = memberService;
     }
 
     public void view() {
-        Scanner scanner = new Scanner(System.in);
+
+        GenderStatus gender;
+        Member member;
+
         Member deletedMember = null;
         while (true) {
             System.out.println("[0]뒤로 \t [1]회원조회 \t [2]회원등록 \t [3]회원수정 \t [4]회원삭제 \t [5]삭제취소");
@@ -35,7 +46,7 @@ public class MemberView {
                 case ("0"): // 뒤로
                     return;
                 case ("1"): // 회원조회
-                    System.out.println(memberService.findAllMember());
+                    System.out.println(MainView.memberService.findAllMember());
                     break;
                 case ("2"): // 회원등록
 //                    System.out.println("ID을 입력해주세요");

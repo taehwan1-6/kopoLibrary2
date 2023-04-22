@@ -17,6 +17,20 @@ public class Member {
     private String birthDate;
     private String joinDate;
 
+    public Member() {
+    }
+
+    public Member(Long id, String name, GenderStatus gender, String age, String address, String number, String birthDate, String joinDate) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.address = address;
+        this.number = number;
+        this.birthDate = birthDate;
+        this.joinDate = joinDate;
+    }
+
     public Member(String name) {
         this(name, GenderStatus.MALE, null, null, "1997/09/16");
     }
