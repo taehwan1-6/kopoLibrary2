@@ -4,20 +4,49 @@ import com.kopo.library.domain.GenderStatus;
 import com.kopo.library.domain.Member;
 import com.kopo.library.view.MainView;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MemberRepoDbImpl implements MemberRepository {
+    
+    Connection connection = MainView.connection;
 
     public MemberRepoDbImpl() {
     }
 
     @Override
     public void insertMember(Member member) {
+//        String query = "INSERT INTO MEMBER (id, memberName, gender, address, phoneNumber, birthDate, joinDate) " +
+//                "VALUES (MEMBER_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO MEMBER (id, name, gender, address, phone_number, birthDate) " +
+                "VALUES (MEMBER_ID_SEQ.NEXTVAL, ?, ?, ?, ?, ?)";
 
+        String name = member.getName();
+        String gender = String.valueOf(member.getGender());
+        String address = member.getAddress();
+        String phoneNumber = member.getPhoneNumber();
+        String birthday = member.getBirthDate();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, gender);
+//            preparedStatement.setString(3, member.getAge());
+            preparedStatement.setString(3, address);
+            preparedStatement.setString(4, phoneNumber);
+            preparedStatement.setString(5, birthday);
+//            preparedStatement.setString(7, member.getJoinDate());
+
+            preparedStatement.executeUpdate();
+            System.out.println("회원 등록이 완료되었습니다.");
+
+            connection.commit(); // COMMIT 수행
+
+
+        } catch (SQLException e) {
+            System.out.println("SQL Statement or DB Connection Error Occur");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -36,7 +65,8 @@ public class MemberRepoDbImpl implements MemberRepository {
 
         System.out.println("MEMBER_ID \t NAME \t SIGN_UP_DAY \t ADDRESS \t PHONE_NUMBER \t BIRTHDAY");
 
-        String query = "select * from member";
+        String query = "SELECT * FROM MEMBER "
+                + "ORDER BY ID";
 //        String query = "SELECT MEMBER_ID, NAME, TO_CHAR(SIGN_UP_DAY, 'YYYY/MM/DD') AS SIGN_UP_DAY, "
 //                + "ADDRESS, PHONE_NUMBER, TO_CHAR(BIRTHDAY, 'YYYY/MM/DD') AS BIRTHDAY "
 //                + "FROM MEMBER ORDER BY MEMBER_ID";
@@ -44,7 +74,7 @@ public class MemberRepoDbImpl implements MemberRepository {
         Statement statement = null;
         ResultSet resultSet = null;
         try {
-            statement = MainView.connection.createStatement();
+            statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
 
             // Query 결과를 처리

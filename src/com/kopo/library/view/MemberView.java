@@ -51,6 +51,10 @@ public class MemberView {
                     userInput = scanner.nextLine();
                     gender = GenderStatus.valueOf(userInput);
 
+//                    System.out.println("나이를 입력해주세요 \t ");
+//                    userInput = scanner.nextLine();
+//                    String age = userInput;
+
                     System.out.println("주소를 입력해주세요 \t (입력예시 : 인천광역시)");
                     userInput = scanner.nextLine();
                     String address = userInput;

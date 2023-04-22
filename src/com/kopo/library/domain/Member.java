@@ -20,32 +20,34 @@ public class Member {
     public Member() {
     }
 
-    // 1. Memory 모드 일때
-    public Member(String name, GenderStatus gender, String address, String phoneNumber, String birthDate) {
-        this.id = ID_GENERATOR.getAndIncrement();
-        this.name = name;
-        this.gender = gender;
-        this.age = String.valueOf(Period.between(LocalDate.now(), LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("yyyy/MM/dd")))
-                .getYears() * -1);
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.birthDate = birthDate;
-        this.joinDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-    }
+//    // 1. Memory 모드 일때 - 회원 삽입, age처리
+//    public Member(String name, GenderStatus gender, String address, String phoneNumber, String birthDate) {
+//        this.id = ID_GENERATOR.getAndIncrement();
+//        this.name = name;
+//        this.gender = gender;
+//        this.age = String.valueOf(Period.between(LocalDate.now(), LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("yyyy/MM/dd")))
+//                .getYears() * -1);
+//        this.address = address;
+//        this.phoneNumber = phoneNumber;
+//        this.birthDate = birthDate;
+//        this.joinDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+//    }
+//
+//    // 1. Memory 모드에서 - Id 사용해서 수정, 삭제 해줄 때, age처리
+//    public Member(Long id, String name, GenderStatus gender, String address, String phoneNumber, String birthDate) {
+//        this.id = id;
+//        this.name = name;
+//        this.gender = gender;
+//        this.age = String.valueOf(Period.between(LocalDate.now(), LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("yyyy/MM/dd")))
+//                .getYears() * -1);
+//        this.address = address;
+//        this.phoneNumber = phoneNumber;
+//        this.birthDate = birthDate;
+//    }
 
-    // 1. Memory 모드에서 - Id 사용해서 수정, 삭제 해줄 때
-    public Member(Long id, String name, GenderStatus gender, String address, String phoneNumber, String birthDate) {
-        this.id = id;
-        this.name = name;
-        this.gender = gender;
-        this.age = String.valueOf(Period.between(LocalDate.now(), LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("yyyy/MM/dd")))
-                .getYears() * -1);
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.birthDate = birthDate;
-    }
+    // 회원 조회
 
-    // 3. DB 모드일때
+
     public Member(Long id, String name, GenderStatus gender, String age, String address, String phoneNumber, String birthDate, String joinDate) {
         this.id = id;
         this.name = name;
@@ -55,6 +57,27 @@ public class Member {
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
         this.joinDate = joinDate;
+    }
+
+    // 3. DB 모드일때 - 회원 수정
+    public Member(Long id, String name, GenderStatus gender, String address, String phoneNumber, String birthDate) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+        this.joinDate = joinDate;
+    }
+
+    // 3. DB 모드일때 - 회원 삽입
+    public Member(String name, GenderStatus gender, String address, String phoneNumber, String birthDate) {
+        this.name = name;
+        this.gender = gender;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
     }
 
 
