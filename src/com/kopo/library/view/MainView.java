@@ -2,6 +2,7 @@ package com.kopo.library.view;
 
 import com.kopo.library.domain.Book;
 import com.kopo.library.domain.Member;
+import com.kopo.library.service.CrudService;
 import com.kopo.library.service.MemberService;
 
 import java.sql.Connection;
@@ -18,6 +19,7 @@ public class MainView {
 
     // Service
     public static MemberService memberService;
+    public static CrudService bookService;
 //    public static BookService bookService;
 //    public static LoanService loanService;
 
@@ -28,8 +30,9 @@ public class MainView {
     public static List<Book> books = new ArrayList<>();
 
     // View
-    public static MemberView memberView = new MemberView();
     public static ModeView modeView = new ModeView();
+    public static MemberView memberView = new MemberView();
+    public static BookView bookView = new BookView();
 
 
     public static void main(String[] args) {
@@ -63,8 +66,8 @@ public class MainView {
                     memberView.view();
                     break;
                 case ("2"):
-//                    bookView.run();
-//                    break;
+                    bookView.view();
+                    break;
                 case ("3"):
 //                    loanView.run();
 //                    break;

@@ -38,7 +38,7 @@ public class BookRepoDbImpl implements CrudRepository{
     public List<Book> findAllObjects() {
 
         String query = "SELECT * FROM BOOK "
-                + "ORDER BY ID";
+                + "ORDER BY bookId";
 
         try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query);)
         {
