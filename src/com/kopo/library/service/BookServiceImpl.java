@@ -1,5 +1,6 @@
 package com.kopo.library.service;
 
+import com.kopo.library.domain.Book;
 import com.kopo.library.repository.CrudRepository;
 import com.kopo.library.repository.MemberRepository;
 
@@ -30,7 +31,7 @@ public class BookServiceImpl implements CrudService{
     }
 
     @Override
-    public List findAllObjects() {
+    public List<Book> findAllObjects() {
         return bookRepository.findAllObjects();
     }
 
