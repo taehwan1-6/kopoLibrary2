@@ -65,4 +65,17 @@ public class Book {
     public void setPossibleBorrow(boolean possibleBorrow) {
         isPossibleBorrow = possibleBorrow;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", publicationDate='" + publicationDate + '\'' +
+                ", isPossibleBorrow=" + isPossibleBorrow +
+                '}' +
+                '\n';
+    }
 }

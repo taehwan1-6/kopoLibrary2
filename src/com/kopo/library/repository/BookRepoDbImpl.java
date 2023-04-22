@@ -37,7 +37,7 @@ public class BookRepoDbImpl implements BookRepository{
         List<Book> books = new ArrayList<>();
 
         String query = "SELECT * FROM BOOK "
-                + "ORDER BY ID";
+                + "ORDER BY bookId";
 
         try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query);)
         {

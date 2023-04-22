@@ -1,15 +1,16 @@
 package com.kopo.library.service;
 
 import com.kopo.library.domain.Book;
+import com.kopo.library.repository.BookRepository;
 
 import java.util.List;
 
 public class BookServiceImpl implements BookService{
 
-    BookService bookService;
+    private BookRepository bookRepository;
 
-    public BookServiceImpl(BookService bookService) {
-        this.bookService = bookService;
+    public BookServiceImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
     @Override
@@ -29,12 +30,12 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public List<Book> findAllBook() {
-        return null;
+        return bookRepository.findAllBook();
     }
 
     @Override
     public Book findById(Long id) {
-        return bookService.findAllBook();
+        return null;
     }
 
     @Override
