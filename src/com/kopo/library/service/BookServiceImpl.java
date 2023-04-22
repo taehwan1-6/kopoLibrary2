@@ -20,12 +20,12 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public void updateBook(Book book) {
-
+        bookRepository.updateBook(book);
     }
 
     @Override
     public void deleteBook(Book book) {
-
+        bookRepository.deleteBook(book);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public Book findById(Long id) {
-        return null;
+        return bookRepository.findById(id);
     }
 
     @Override

@@ -20,7 +20,7 @@ public interface BookRepository {
     // 조회
     List<Book> findAllBook();
 
-    Book findById(Long bookId);
+    Book findById(Long id);
 
     Book findByTitle(String title);
 

@@ -1,6 +1,8 @@
 package com.kopo.library.repository;
 
 import com.kopo.library.domain.Book;
+import com.kopo.library.domain.GenderStatus;
+import com.kopo.library.domain.Book;
 import com.kopo.library.view.MainView;
 
 import java.sql.*;
@@ -47,12 +49,53 @@ public class BookRepoDbImpl implements BookRepository{
 
     @Override
     public void updateBook(Book book) {
+        String query = "UPDATE BOOK SET title = ?, author = ?, publisher = ?, publicationDate = ?, isPossibleBorrow = ? WHERE bookId = ?";
+
+        String title = book.getTitle();
+        String author = book.getAuthor();
+        String publisher = book.getPublisher();
+        String publicationDate = book.getPublicationDate();
+        boolean isPossibleBorrow = book.isPossibleBorrow();
+        Long bookId = book.getBookId();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, title);
+            preparedStatement.setString(2, author);
+            preparedStatement.setString(3, publisher);
+            preparedStatement.setString(4, publicationDate);
+            preparedStatement.setString(5, Boolean.toString(isPossibleBorrow));
+            preparedStatement.setLong(6, bookId);
+
+            preparedStatement.executeUpdate();
+            System.out.println("도서 정보 수정이 완료되었습니다.");
+
+            connection.commit(); // COMMIT 수행
+
+        } catch (SQLException e) {
+            System.out.println("SQL Statement or DB Connection Error Occur");
+            e.printStackTrace();
+        }
 
     }
 
     @Override
     public void deleteBook(Book book) {
+        String query = "DELETE FROM BOOK WHERE bookId = ?";
 
+        Long bookId = book.getBookId();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setLong(1, bookId);
+
+            preparedStatement.executeUpdate();
+            System.out.println("도서 삭제가 완료되었습니다.");
+
+            connection.commit(); // COMMIT 수행
+
+        } catch (SQLException e) {
+            System.out.println("SQL Statement or DB Connection Error Occur");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -87,8 +130,35 @@ public class BookRepoDbImpl implements BookRepository{
     }
 
     @Override
-    public Book findById(Long bookId) {
-        return null;
+    public Book findById(Long originId) {
+        Book book = null;
+
+        String query = "SELECT * FROM BOOK WHERE bookId = ?";
+        try {
+            // PreparedStatement를 사용하여 파라미터를 바인딩하고 쿼리 실행
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, originId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // 조회 결과를 Book 객체에 매핑
+            if (resultSet.next()) {
+                Long bookId = resultSet.getLong("bookId");
+                String title = resultSet.getString("title");
+                String author = resultSet.getString("author");
+                String publisher = resultSet.getString("publisher");
+                String publicationDate = resultSet.getString("publicationDate");
+                boolean isPossibleBorrow = resultSet.getBoolean("isPossibleBorrow");
+
+
+                book = new Book(bookId, title, author, publisher, publicationDate, isPossibleBorrow);
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println("SQL Statement or DB Connection Error Occur");
+            e.printStackTrace();
+        }
+        return book;
     }
 
     @Override
