@@ -76,7 +76,20 @@ public class MemberRepoDbImpl implements MemberRepository {
 
     @Override
     public void deleteMember(Member member) {
+        String query = "DELETE FROM MEMBER WHERE ID = ?";
 
+        Long id = member.getId();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setLong(1, id);
+
+            preparedStatement.executeUpdate();
+            System.out.println("회원 삭제가 완료되었습니다.");
+
+        } catch (SQLException e) {
+            System.out.println("SQL Statement or DB Connection Error Occur");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -128,8 +141,36 @@ public class MemberRepoDbImpl implements MemberRepository {
     }
 
     @Override
-    public Member findById(Long id) {
-        return null;
+    public Member findById(Long originId) {
+        Member member = null;
+        try {
+            // PreparedStatement를 사용하여 파라미터를 바인딩하고 쿼리 실행
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM MEMBER WHERE ID = ?");
+            preparedStatement.setLong(1, originId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // 조회 결과를 Member 객체에 매핑
+            if (resultSet.next()) {
+                Long id = resultSet.getLong("ID");
+                String name = resultSet.getString("NAME");
+                GenderStatus gender = GenderStatus.valueOf(resultSet.getString("GENDER"));
+                String age = resultSet.getString("AGE");
+                String address = resultSet.getString("ADDRESS");
+                String phoneNumber = resultSet.getString("PHONE_NUMBER");
+                String birthDate = resultSet.getString("BIRTHDATE");
+                String joinDate = resultSet.getString("JOINDATE");
+
+
+                member = new Member(id, name, gender, age, address, phoneNumber, birthDate, joinDate);
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println("SQL Statement or DB Connection Error Occur");
+            e.printStackTrace();
+        }
+        return member;
+
     }
 
     @Override
@@ -139,6 +180,13 @@ public class MemberRepoDbImpl implements MemberRepository {
 
     @Override
     public Member restore(Member member) {
+        try {
+            connection.rollback(); // ROLLBACK
+            System.out.println("ROLLBACK");
+        } catch (SQLException e) {
+            System.out.println("SQL Statement or DB Connection Error Occur");
+            e.printStackTrace();
+        }
         return null;
     }
 

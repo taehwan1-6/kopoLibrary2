@@ -4,6 +4,7 @@ import com.kopo.library.domain.Member;
 import com.kopo.library.service.MemberService;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MainView {
@@ -63,8 +64,13 @@ public class MainView {
 //                    break;
                 case ("4"):
                     System.out.println("프로그램을 종료합니다.");
+                    try {
+                        connection.commit();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                     scanner.close();
-                    System.exit(0);;
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("잘못된 입력입니다. 다시 입력하세요.");

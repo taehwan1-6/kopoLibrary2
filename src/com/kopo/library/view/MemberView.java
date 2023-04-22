@@ -113,13 +113,16 @@ public class MemberView {
 //                    deletedMember = memberService.createTemporaryMember(userInput);
                     deletedMember = memberService.findById(originId);
                     memberService.deleteMember(memberService.findById(originId));
+
+//                    member = new Member();
+//                    memberService.deleteMember();
                     break;
                 case ("5"): // 삭제취소
                     if (deletedMember == null) {
                         System.out.println("최근 삭제된 회원 데이터가 없습니다.");
                         break;
                     } else {
-                        memberService.insertMember(deletedMember);
+                        memberService.restore(deletedMember);
                         System.out.println("최근 삭제된 회원 데이터가 복구되었습니다.");
                         break;
                     }

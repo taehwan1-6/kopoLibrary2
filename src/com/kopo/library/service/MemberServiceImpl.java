@@ -24,7 +24,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void deleteMember(Member member) {
-
+        memberRepository.deleteMember(member);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member findById(Long id) {
-        return null;
+        return memberRepository.findById(id);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member restore(Member member) {
-        return null;
+        return memberRepository.restore(member);
     }
 
 }
