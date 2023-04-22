@@ -54,15 +54,15 @@ public class MemberRepoDbImpl implements MemberRepository {
                 GenderStatus gender = GenderStatus.valueOf(resultSet.getString("GENDER"));
                 String age = resultSet.getString("AGE");
                 String address = resultSet.getString("ADDRESS");
-                String number = resultSet.getString("MOBILE_NUMBER");
+                String phoneNumber = resultSet.getString("PHONE_NUMBER");
                 String birthDate = resultSet.getString("BIRTHDATE");
                 String joinDate = resultSet.getString("JOINDATE");
 
                 // Query 결과를 출력
-                System.out.println(id + "\t" + name + "\t" + address + "\t" + number
+                System.out.println(id + "\t" + name + "\t" + address + "\t" + phoneNumber
                         + "\t" + birthDate + "\t" + joinDate);
 
-                Member member = new Member(id, name, gender, age, address, number, birthDate, joinDate);
+                Member member = new Member(id, name, gender, age, address, phoneNumber, birthDate, joinDate);
                 members.add(member);
 
 
