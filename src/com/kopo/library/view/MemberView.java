@@ -85,7 +85,7 @@ public class MemberView {
                     userInput = scanner.nextLine();
                     name = userInput;
 
-                    System.out.println("변경될 성별을 입력해주세요 \t (입력예시 : MALE or FEMALE)");
+                    System.out.println("변경될 성별을 입력해주세요 \t (입력예시 : MALE or FEMALE or ETC)");
                     userInput = scanner.nextLine();
                     gender = GenderStatus.valueOf(userInput);
 
