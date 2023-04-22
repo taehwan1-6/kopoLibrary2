@@ -1,10 +1,8 @@
 package com.kopo.library.service;
 
 import com.kopo.library.domain.Member;
-import com.kopo.library.repository.MemberRepoDbImpl;
 import com.kopo.library.repository.MemberRepository;
 
-import java.sql.Connection;
 import java.util.List;
 
 public class MemberServiceImpl implements MemberService {
@@ -48,4 +46,5 @@ public class MemberServiceImpl implements MemberService {
     public Member restore(Member member) {
         return null;
     }
+
 }

@@ -1,8 +1,5 @@
 package com.kopo.library.domain;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Member {
@@ -46,8 +43,6 @@ public class Member {
 //    }
 
     // 회원 조회
-
-
     public Member(Long id, String name, GenderStatus gender, String age, String address, String phoneNumber, String birthDate, String joinDate) {
         this.id = id;
         this.name = name;
@@ -79,8 +74,6 @@ public class Member {
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
     }
-
-
 
 
     public Long getId() {

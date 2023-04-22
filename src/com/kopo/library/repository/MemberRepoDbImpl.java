@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberRepoDbImpl implements MemberRepository {
-    
     Connection connection = MainView.connection;
 
     public MemberRepoDbImpl() {
@@ -17,8 +16,6 @@ public class MemberRepoDbImpl implements MemberRepository {
 
     @Override
     public void insertMember(Member member) {
-//        String query = "INSERT INTO MEMBER (id, memberName, gender, address, phoneNumber, birthDate, joinDate) " +
-//                "VALUES (MEMBER_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
         String query = "INSERT INTO MEMBER (id, name, gender, address, phone_number, birthDate) " +
                 "VALUES (MEMBER_ID_SEQ.NEXTVAL, ?, ?, ?, ?, ?)";
 
@@ -31,11 +28,9 @@ public class MemberRepoDbImpl implements MemberRepository {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, gender);
-//            preparedStatement.setString(3, member.getAge());
             preparedStatement.setString(3, address);
             preparedStatement.setString(4, phoneNumber);
             preparedStatement.setString(5, birthDate);
-//            preparedStatement.setString(7, member.getJoinDate());
 
             preparedStatement.executeUpdate();
             System.out.println("회원 등록이 완료되었습니다.");
@@ -71,6 +66,8 @@ public class MemberRepoDbImpl implements MemberRepository {
             preparedStatement.executeUpdate();
             System.out.println("회원 정보 수정이 완료되었습니다.");
 
+            connection.commit(); // COMMIT 수행
+
         } catch (SQLException e) {
             System.out.println("SQL Statement or DB Connection Error Occur");
             e.printStackTrace();
@@ -86,13 +83,8 @@ public class MemberRepoDbImpl implements MemberRepository {
     public List<Member> findAllMember() {
         List<Member> members = new ArrayList<>();
 
-        System.out.println("MEMBER_ID \t NAME \t SIGN_UP_DAY \t ADDRESS \t PHONE_NUMBER \t BIRTHDAY");
-
         String query = "SELECT * FROM MEMBER "
                 + "ORDER BY ID";
-//        String query = "SELECT MEMBER_ID, NAME, TO_CHAR(SIGN_UP_DAY, 'YYYY/MM/DD') AS SIGN_UP_DAY, "
-//                + "ADDRESS, PHONE_NUMBER, TO_CHAR(BIRTHDAY, 'YYYY/MM/DD') AS BIRTHDAY "
-//                + "FROM MEMBER ORDER BY MEMBER_ID";
 
         Statement statement = null;
         ResultSet resultSet = null;
@@ -111,14 +103,8 @@ public class MemberRepoDbImpl implements MemberRepository {
                 String birthDate = resultSet.getString("BIRTHDATE");
                 String joinDate = resultSet.getString("JOINDATE");
 
-                // Query 결과를 출력
-                System.out.println(id + "\t" + name + "\t" + address + "\t" + phoneNumber
-                        + "\t" + birthDate + "\t" + joinDate);
-
                 Member member = new Member(id, name, gender, age, address, phoneNumber, birthDate, joinDate);
                 members.add(member);
-
-
             }
 
         } catch (SQLException e) {
@@ -138,7 +124,6 @@ public class MemberRepoDbImpl implements MemberRepository {
             }
         }
 
-//        return null;
         return members;
     }
 
@@ -156,4 +141,5 @@ public class MemberRepoDbImpl implements MemberRepository {
     public Member restore(Member member) {
         return null;
     }
+
 }

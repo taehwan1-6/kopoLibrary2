@@ -1,13 +1,10 @@
 package com.kopo.library.view;
 
+import com.kopo.library.domain.Member;
+import com.kopo.library.service.MemberService;
+
 import java.sql.Connection;
 import java.util.Scanner;
-
-import com.kopo.library.domain.Member;
-import com.kopo.library.repository.MemberRepoDbImpl;
-import com.kopo.library.service.MemberService;
-import com.kopo.library.service.MemberServiceImpl;
-import com.kopo.library.util.dbconnector.DBConnector;
 
 public class MainView {
     // Util

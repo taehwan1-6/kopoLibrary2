@@ -4,8 +4,6 @@ import com.kopo.library.repository.MemberRepoDbImpl;
 import com.kopo.library.service.MemberServiceImpl;
 import com.kopo.library.util.dbconnector.DBConnector;
 
-import java.util.Scanner;
-
 public class ModeView {
 
     public void view() {
