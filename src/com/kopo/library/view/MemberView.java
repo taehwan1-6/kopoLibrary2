@@ -92,9 +92,6 @@ public class MemberView {
                     System.out.println("생일을 입력해주세요 \t (입력예시 : 1997/09/16)");
                     userInput = scanner.nextLine();
                     birthDate = userInput;
-                    // 혹시나 아래와 같이 new로 새로 생성했기때문에 -> 기존의 가입날짜가 유지가 안되고 -> new로 인스턴스 생성될때의 가입날짜로 뜬다면
-                    // String joinDate = memberService.findById(originId).getJoinDate();
-                    // member = new Member(originId, name, gender, address, phoneNumber, birthDate, joinDate); // 이거로 처리
 
                     member = new Member(originId, name, gender, address, phoneNumber, birthDate);
                     memberService.updateMember(member);
@@ -105,17 +102,10 @@ public class MemberView {
                             "--------------------------------------------------------------------------------------------------");
                     System.out.println("삭제할 회원의 ID을 입력해주세요.");
                     originId = scanner.nextLong();
-//                    while(!memberService.isExistId(userInput)){
-//                        System.out.println("존재하지 않는 ID입니다.");
-//                        System.out.println("다른 ID를 입력해주세요.");
-//                        userInput = scanner.nextLine();
-//                    }
-//                    deletedMember = memberService.createTemporaryMember(userInput);
+
                     deletedMember = memberService.findById(originId);
                     memberService.deleteMember(memberService.findById(originId));
 
-//                    member = new Member();
-//                    memberService.deleteMember();
                     break;
                 case ("5"): // 삭제취소
                     if (deletedMember == null) {

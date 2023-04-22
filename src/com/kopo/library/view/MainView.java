@@ -29,7 +29,7 @@ public class MainView {
     public static void main(String[] args) {
         System.out.println(
                 "==================================================================================================");
-        System.out.println("도서 대출 관리 프로그램 - 0.2.0 version");
+        System.out.println("도서 관리 프로그램 - 2.0 version");
         System.out.println(
                 "==================================================================================================");
 
