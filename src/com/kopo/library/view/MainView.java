@@ -2,6 +2,7 @@ package com.kopo.library.view;
 
 import com.kopo.library.domain.Member;
 import com.kopo.library.service.BookService;
+import com.kopo.library.service.BorrowService;
 import com.kopo.library.service.MemberService;
 
 import java.sql.Connection;
@@ -16,7 +17,7 @@ public class MainView {
     // Service
     public static MemberService memberService;
     public static BookService bookService;
-//    public static LoanService loanService;
+    public static BorrowService borrowService;
 
     // Domain
     public static Member prviousMember = new Member();
@@ -26,6 +27,7 @@ public class MainView {
     public static ModeView modeView = new ModeView();
     public static MemberView memberView = new MemberView();
     public static BookView bookView = new BookView();
+    public static BorrowView borrowView = new BorrowView();
 
 
     public static void main(String[] args) {
@@ -62,8 +64,8 @@ public class MainView {
                     bookView.view();
                     break;
                 case ("3"):
-//                    loanView.run();
-//                    break;
+                    borrowView.view();
+                    break;
                 case ("4"):
                     System.out.println("프로그램을 종료합니다.");
                     try {

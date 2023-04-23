@@ -1,8 +1,10 @@
 package com.kopo.library.view;
 
 import com.kopo.library.repository.BookRepoDbImpl;
+import com.kopo.library.repository.BorrowRepoDbImpl;
 import com.kopo.library.repository.MemberRepoDbImpl;
 import com.kopo.library.service.BookServiceImpl;
+import com.kopo.library.service.BorrowServiceImpl;
 import com.kopo.library.service.MemberServiceImpl;
 import com.kopo.library.util.dbconnector.DBConnector;
 
@@ -45,7 +47,7 @@ public class ModeView {
 
             MainView.memberService = new MemberServiceImpl(new MemberRepoDbImpl());
             MainView.bookService = new BookServiceImpl(new BookRepoDbImpl());
-//            loanService = new LoanServiceImpl(new LoanDbmsDAOImpl());
+            MainView.borrowService = new BorrowServiceImpl(new BorrowRepoDbImpl());
         }
 
     }
