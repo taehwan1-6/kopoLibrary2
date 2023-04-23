@@ -80,7 +80,6 @@ public class BorrowRepoDbImpl implements BorrowRepository {
             e.printStackTrace();
         }
 
-
         return null;
     }
 
@@ -121,8 +120,35 @@ public class BorrowRepoDbImpl implements BorrowRepository {
     }
 
     @Override
-    public Borrow findById(Long id) {
-        return null;
+    public Borrow findById(Long originId) {
+        Borrow borrow = null;
+
+        String query = "SELECT * FROM borrow WHERE borrowId = ?";
+        try {
+            // PreparedStatement를 사용하여 파라미터를 바인딩하고 쿼리 실행
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, originId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // 조회 결과를 Book 객체에 매핑
+            if (resultSet.next()) {
+                Long borrowId = resultSet.getLong("borrowId");
+                Long memberId = resultSet.getLong("memberId");
+                Long bookId = resultSet.getLong("bookId");
+                boolean isPossibleExtend = resultSet.getBoolean("isPossibleExtend");
+                String startDate = resultSet.getString("startDate");
+                String endDate = resultSet.getString("endDate");
+
+
+                borrow = new Borrow(borrowId, memberId, bookId, isPossibleExtend, startDate, endDate);
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println("SQL Statement or DB Connection Error Occur");
+            e.printStackTrace();
+        }
+        return borrow;
     }
 
     @Override

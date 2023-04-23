@@ -43,7 +43,7 @@ public class BorrowServiceImpl implements BorrowService{
 
     @Override
     public Borrow findById(Long id) {
-        return null;
+        return borrowRepository.findById(id);
     }
 
     @Override
