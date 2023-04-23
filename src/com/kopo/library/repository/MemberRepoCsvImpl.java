@@ -4,6 +4,8 @@ import com.kopo.library.domain.GenderStatus;
 import com.kopo.library.domain.Member;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,9 +45,64 @@ public class MemberRepoCsvImpl implements MemberRepository {
 
     }
 
+    /**
+     * 회원 수정
+     * @param member
+     */
     @Override
     public void updateMember(Member member) {
+        File inputFile = new File("member.csv");
+        File tempFile = new File("temp.csv");
 
+        BufferedReader reader = null;
+        BufferedWriter writer = null;
+
+        try {
+            reader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(inputFile), "UTF-8"));
+            writer = new BufferedWriter(
+                    new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+                // 수정하고자 하는 회원의 Id인 경우
+                if (fields[0].equals(member.getId())) {
+
+                    // 새로운 정보로 수정
+                    fields[1] = member.getName();
+                    fields[2] = member.getGender().name();
+                    fields[3] = member.getAddress();
+                    fields[4] = member.getPhoneNumber();
+                    fields[5] = member.getBirthDate();
+                    fields[6] = member.getJoinDate();
+                    // 새로운 정보를 csv 형식으로 작성하여 파일에 저장
+                    writer.write(String.join(",", fields));
+                    writer.write(NEWLINE);
+                } else {
+                    // 수정하지 않는 회원 정보는 그대로 유지하여 파일에 저장
+                    writer.write(line);
+                    writer.write(NEWLINE);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+                if (writer != null) {
+                    writer.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        // 기존 csv 파일 삭제하고 수정된 파일로 변경
+        inputFile.delete();
+        tempFile.renameTo(inputFile);
     }
 
     @Override
