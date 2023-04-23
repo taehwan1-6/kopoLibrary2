@@ -66,15 +66,15 @@ public class BorrowView {
                     // BOOK의 대출 가능 여부 컬럼 false(불가)로 변경
                     bookService.isPossibleBorrowChange(false, bookId);
                     break;
-//                case ("3"): // 대출연장
-//                    loanService.inquiryExtenstionableLoanData(); // 대출 기한 연장 가능 도서 목록 조회
-//                    System.out.println(
-//                            "--------------------------------------------------------------------------------------------------");
-//                    System.out.println("대출을 연장시킬 도서의 번호를 입력해주세요.");
-//                    userInput = scanner.nextLine();
-//                    loanService.ExtensionDeadLine(userInput);
-//                    break;
-//                case ("4"): // 도서반납
+                case ("4"): // 대출연장
+                    borrowService.findAllBorrow(); // 대출된 도서 목록 조회
+                    System.out.println(
+                            "--------------------------------------------------------------------------------------------------");
+                    System.out.println("대출을 연장시킬 도서의 번호를 입력해주세요.");
+                    userInput = scanner.nextLine();
+                    borrowService.updateBorrowExtend(borrowService.findById(Long.parseLong(userInput)));
+                    break;
+//                case ("5"): // 도서반납
 //                    loanService.inquiryLoanData();
 //                    System.out.println(
 //                            "--------------------------------------------------------------------------------------------------");

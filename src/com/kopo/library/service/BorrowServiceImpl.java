@@ -38,7 +38,7 @@ public class BorrowServiceImpl implements BorrowService{
 
     @Override
     public void updateBorrowExtend(Borrow borrow) {
-
+        borrowRepository.updateBorrowExtend(borrow);
     }
 
     @Override

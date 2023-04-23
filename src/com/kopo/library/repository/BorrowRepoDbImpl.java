@@ -114,9 +114,28 @@ public class BorrowRepoDbImpl implements BorrowRepository {
 
     }
 
+    /**
+     * 대출 기한 연장 메소드
+     * @param borrow(대출 기한을 연장할 대출정보의 borrow 객체)
+     * 대출 기한 연장하면 isPossibleExtend = 'false' 로 변경
+     */
     @Override
     public void updateBorrowExtend(Borrow borrow) {
+        String query = "UPDATE borrow SET isPossibleExtend = 'false', endDate = endDate + 14 WHERE borrowId = ?";
 
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setLong(1, borrow.getBorrowId());
+
+            preparedStatement.executeUpdate();
+            System.out.println("대출 기한 연장이 완료되었습니다.");
+
+            connection.commit(); // COMMIT 수행
+
+        } catch (SQLException e) {
+            System.out.println("SQL Statement or DB Connection Error Occur");
+            e.printStackTrace();
+        }
     }
 
     @Override
