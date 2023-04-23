@@ -57,12 +57,8 @@ public class BorrowView {
                     long memberId = Long.parseLong(userInput);
 
                     Borrow borrow = new Borrow(bookId, memberId);
-                    try {
-                        borrowService.insertBorrow(borrow);
-                    } catch (Exception e) {
-                           e.printStackTrace();
-                           break;
-                    }
+
+                    borrowService.insertBorrow(borrow);
                     // BOOK의 대출 가능 여부 컬럼 false(불가)로 변경
                     bookService.isPossibleBorrowChange(false, bookId);
                     break;
@@ -74,15 +70,18 @@ public class BorrowView {
                     userInput = scanner.nextLine();
                     borrowService.updateBorrowExtend(borrowService.findById(Long.parseLong(userInput)));
                     break;
-//                case ("5"): // 도서반납
-//                    loanService.inquiryLoanData();
-//                    System.out.println(
-//                            "--------------------------------------------------------------------------------------------------");
-//                    System.out.println("반납을 진행하실 대출 정보의 번호를 입력해주세요.");
-//                    userInput = scanner.nextLine();
-//                    bookService.changeReturnStatus("T", loanService.findBookId(userInput)); // BOOK의 대출 가능 여부 컬럼 T(가능)로 변경
-//                    loanService.returnBook(userInput);
-//                    break;
+                case ("5"): // 도서반납
+                    borrowService.findAllBorrow(); // 대출된 도서 목록 조회
+                    System.out.println(
+                            "--------------------------------------------------------------------------------------------------");
+                    System.out.println("반납을 진행하실 대출 정보의 번호를 입력해주세요.");
+                    userInput = scanner.nextLine();
+
+                    // BOOK의 대출 가능 여부 컬럼 true(가능)로 변경
+                    bookService.isPossibleBorrowChange(true, borrowService.findBookId(Long.parseLong(userInput)));
+
+                    borrowService.deleteBorrow(borrowService.findById(Long.parseLong(userInput)));
+                    break;
                 default:
                     System.out.println("잘못된 입력입니다. 다시 입력하세요.");
                     continue;

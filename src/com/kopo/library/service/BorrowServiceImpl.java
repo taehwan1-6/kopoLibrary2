@@ -33,7 +33,7 @@ public class BorrowServiceImpl implements BorrowService{
 
     @Override
     public void deleteBorrow(Borrow borrow) {
-
+        borrowRepository.deleteBorrow(borrow);
     }
 
     @Override
@@ -49,5 +49,10 @@ public class BorrowServiceImpl implements BorrowService{
     @Override
     public Borrow findByTitle(String title) {
         return null;
+    }
+
+    @Override
+    public Long findBookId(Long borrowId) {
+        return borrowRepository.findBookId(borrowId);
     }
 }

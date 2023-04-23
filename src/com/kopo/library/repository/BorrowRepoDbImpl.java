@@ -109,14 +109,32 @@ public class BorrowRepoDbImpl implements BorrowRepository {
         }
     }
 
+
+    /**
+     * 도서 반납 메소드
+     * @param borrow(반납하려는 대출정보 borrow 객체)
+     */
     @Override
     public void deleteBorrow(Borrow borrow) {
+        String query = "DELETE FROM borrow WHERE borrowId = ?";
 
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setLong(1, borrow.getBorrowId());
+
+            preparedStatement.executeUpdate();
+            System.out.println("도서 반납이 완료되었습니다.");
+
+            connection.commit(); // COMMIT 수행
+
+        } catch (SQLException e) {
+            System.out.println("SQL Statement or DB Connection Error Occur");
+            e.printStackTrace();
+        }
     }
 
     /**
      * 대출 기한 연장 메소드
-     * @param borrow(대출 기한을 연장할 대출정보의 borrow 객체)
+     * @param borrow(대출 기한을 연장할 대출정보 borrow 객체)
      * 대출 기한 연장하면 isPossibleExtend = 'false' 로 변경
      */
     @Override
@@ -173,5 +191,65 @@ public class BorrowRepoDbImpl implements BorrowRepository {
     @Override
     public Borrow findByTitle(String title) {
         return null;
+    }
+
+    @Override
+    public Long findBookId(Long borrowId) {
+        String query = "SELECT bookId FROM borrow WHERE borrowId = ?";
+        ResultSet resultSet = null;
+        PreparedStatement preparedStatement = null;
+        Long bookId = -1L; // 결과가 없을 경우 기본값으로 초기화
+
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, borrowId);
+            resultSet = preparedStatement.executeQuery(); // 쿼리 결과
+
+            // 쿼리 결과 처리
+            if (resultSet.next()) {
+                bookId = resultSet.getLong("bookId");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("SQL 문장 또는 DB 연결 오류가 발생했습니다.");
+            e.printStackTrace();
+        } finally {
+            // ResultSet, Statement을 닫아줌
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return bookId;
+
+
+
+//        String query = "SELECT bookId FROM borrow WHERE borrowId = ?";
+//
+//        Long bookId = null; // 결과가 없을 경우 기본값으로 초기화
+//
+//        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+//             ResultSet resultSet = preparedStatement.executeQuery())
+//        {
+//            preparedStatement.setLong(1, borrowId);
+//
+//            // 쿼리 결과 처리
+//            if (resultSet.next()) {
+//                bookId = resultSet.getLong("bookId");
+//            }
+//
+//        } catch (SQLException e) {
+//            System.out.println("SQL Statement or DB Connection Error Occur");
+//            e.printStackTrace();
+//        }
+//
+//        return bookId;
     }
 }

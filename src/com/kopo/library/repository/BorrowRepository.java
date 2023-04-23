@@ -31,4 +31,13 @@ public interface BorrowRepository<T> {
     Borrow findById(Long id);
     Borrow findByTitle(String title);
 
+    /**
+     * bookId 검색 메소드
+     * : borrowId를 이용해 대출된 도서를 반납한다. 그러면 isPossibleBorrow(대출가능여부상태)를 true로 바꾸어주어야
+     *   하기 때문에, book에 접근하기 위해 bookId를 얻는 메소드를 만든다.
+     * @param borrowId
+     * @return bookId
+     */
+    Long findBookId(Long borrowId);
+
 }
