@@ -30,6 +30,13 @@ public class Borrow {
         this.isPossibleExtend = isPossibleExtend;
     }
 
+    public Borrow(Long bookId, Long memberId) {
+        this.memberId = memberId;
+        this.bookId = bookId;
+        this.isPossibleBorrow = false;
+        this.isPossibleExtend = true;
+    }
+
     public Long getBorrowId() {
         return borrowId;
     }

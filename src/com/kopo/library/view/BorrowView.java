@@ -1,5 +1,6 @@
 package com.kopo.library.view;
 
+import com.kopo.library.domain.Borrow;
 import com.kopo.library.service.BookService;
 import com.kopo.library.service.BorrowService;
 import com.kopo.library.service.MemberService;
@@ -34,27 +35,31 @@ public class BorrowView {
                 case ("2"): // 대출된 도서 조회
                     borrowService.findAllBorrow();
                     break;
-//                case ("2"): // 도서대출
-//                    System.out.println("대출 가능 도서 목록");
-//                    System.out.println(
-//                            "--------------------------------------------------------------------------------------------------");
-//                    bookService.inquiryLoanableBookList();
-//                    System.out.println(
-//                            "--------------------------------------------------------------------------------------------------");
-//                    System.out.println("대출을 신청하실 도서의 BOOK_ID를 입력해주세요");
-//                    userInput = scanner.nextLine();
-//                    int bookId = Integer.parseInt(userInput);
-//                    memberService.inquiryFullMember();
-//                    System.out.println(
-//                            "--------------------------------------------------------------------------------------------------");
-//                    System.out.println("도서 대출을 신청할 회원의 MEMBER_ID를 입력해주세요");
-//                    userInput = scanner.nextLine();
-//                    int memberId = Integer.parseInt(userInput);
-//
-//                    BookLoan loan = new BookLoan(bookId, memberId);
-//                    loanService.bookLoan(loan);
-//                    bookService.changeReturnStatus("F" ,bookId); // BOOK의 대출 가능 여부 컬럼 F(불가)로 변경
-//                    break;
+                case ("3"): // 도서대출
+                    System.out.println("대출 가능 도서 목록");
+                    System.out.println(
+                            "--------------------------------------------------------------------------------------------------");
+                    System.out.println(borrowService.findAllBorrowAble());
+                    System.out.println(
+                            "--------------------------------------------------------------------------------------------------");
+                    System.out.println("대출될 도서의 BOOK_ID를 입력해주세요");
+                    userInput = scanner.nextLine();
+                    long bookId = Long.parseLong(userInput);
+
+                    System.out.println("도서관 회원 목록");
+                    System.out.println(
+                            "--------------------------------------------------------------------------------------------------");
+                    System.out.println(memberService.findAllMember());
+                    System.out.println(
+                            "--------------------------------------------------------------------------------------------------");
+                    System.out.println("도서 대출 신청한 회원의 MEMBER_ID를 입력해주세요");
+                    userInput = scanner.nextLine();
+                    long memberId = Long.parseLong(userInput);
+
+                    Borrow borrow = new Borrow(bookId, memberId);
+                    borrowService.insertBorrow(borrow);
+                    bookService.isPossibleBorrowChange(false, bookId); // BOOK의 대출 가능 여부 컬럼 F(불가)로 변경
+                    break;
 //                case ("3"): // 대출연장
 //                    loanService.inquiryExtenstionableLoanData(); // 대출 기한 연장 가능 도서 목록 조회
 //                    System.out.println(

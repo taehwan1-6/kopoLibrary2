@@ -170,4 +170,30 @@ public class BookRepoDbImpl implements BookRepository{
     public Book restore(Book book) {
         return null;
     }
+
+
+    /**
+     * 대출 가능 여부 상태 변경 메소드
+     * @param status(대출 가능 여부 true/false)
+     * @param bookId(대출 가능 여부 상태 변경하려는 도서의 BOOK_ID)
+     */
+    @Override
+    public void isPossibleBorrowChange(boolean status, Long bookId) {
+        String query = "UPDATE BOOK SET isPossibleBorrow = ? WHERE bookId = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, Boolean.toString(status));
+            preparedStatement.setLong(2, bookId);
+
+            preparedStatement.executeUpdate();
+            System.out.println("대여상태가 변경되었습니다.");
+
+            connection.commit();
+
+        } catch (SQLException e) {
+            System.out.println("SQL Statement or DB Connection Error Occur");
+            e.printStackTrace();
+        }
+    }
 }

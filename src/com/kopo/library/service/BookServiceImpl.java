@@ -47,4 +47,9 @@ public class BookServiceImpl implements BookService{
     public Book restore(Book book) {
         return null;
     }
+
+    @Override
+    public void isPossibleBorrowChange(boolean status, Long bookId) {
+        bookRepository.isPossibleBorrowChange(status, bookId);
+    }
 }
