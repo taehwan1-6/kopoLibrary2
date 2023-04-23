@@ -211,7 +211,7 @@ public class BorrowRepoDbImpl implements BorrowRepository {
             }
 
         } catch (SQLException e) {
-            System.out.println("SQL 문장 또는 DB 연결 오류가 발생했습니다.");
+            System.out.println("SQL Statement or DB Connection Error Occur");
             e.printStackTrace();
         } finally {
             // ResultSet, Statement을 닫아줌
@@ -228,28 +228,5 @@ public class BorrowRepoDbImpl implements BorrowRepository {
         }
 
         return bookId;
-
-
-
-//        String query = "SELECT bookId FROM borrow WHERE borrowId = ?";
-//
-//        Long bookId = null; // 결과가 없을 경우 기본값으로 초기화
-//
-//        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
-//             ResultSet resultSet = preparedStatement.executeQuery())
-//        {
-//            preparedStatement.setLong(1, borrowId);
-//
-//            // 쿼리 결과 처리
-//            if (resultSet.next()) {
-//                bookId = resultSet.getLong("bookId");
-//            }
-//
-//        } catch (SQLException e) {
-//            System.out.println("SQL Statement or DB Connection Error Occur");
-//            e.printStackTrace();
-//        }
-//
-//        return bookId;
     }
 }
