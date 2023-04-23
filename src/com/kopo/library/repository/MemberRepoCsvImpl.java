@@ -107,7 +107,49 @@ public class MemberRepoCsvImpl implements MemberRepository {
 
     @Override
     public void deleteMember(Member member) {
+        File inputFile = new File("member.csv");
+        File tempFile = new File("temp.csv");
 
+        BufferedReader reader = null;
+        BufferedWriter writer = null;
+
+        try {
+            reader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(inputFile), "UTF-8"));
+            writer = new BufferedWriter(
+                    new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+                // 삭제하고자 하는 회원의 ID와 일치하는 경우
+                if (fields[0].equals(member.getId())) {
+                    continue;
+                } else {
+                    // 삭제하지 않는 회원 정보는 그대로 유지
+                    writer.write(line);
+                    writer.write(NEWLINE);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+                if (writer != null) {
+                    writer.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // 기존 csv 파일 삭제하고 수정된 파일로 변경
+        inputFile.delete();
+        tempFile.renameTo(inputFile);
     }
 
     /**
@@ -159,8 +201,51 @@ public class MemberRepoCsvImpl implements MemberRepository {
     }
 
     @Override
-    public Member findById(Long id) {
-        return null;
+    public Member findById(Long originid) {
+        BufferedReader bufferedReader = null;
+        Member member = null;
+
+        /* csv 파일이 없을 경우의 예외처리 */
+        if (!new File("member.csv").exists()) {
+            throw new IllegalArgumentException("등록된 회원 정보가 없습니다.");
+        }
+
+        try {
+            bufferedReader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream("member.csv"), "UTF-8"));
+
+            String line = bufferedReader.readLine();
+
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] memberData = line.split(",");
+
+                if (!memberData[0].equals(originid)) {
+                    continue;
+                }
+
+                Long id = Long.parseLong(memberData[0]);
+                String name = memberData[1];
+                GenderStatus gender = GenderStatus.valueOf(memberData[2]);
+                String age = memberData[3];
+                String address = memberData[4];
+                String phoneNumber = memberData[5];
+                String birthDate = memberData[6];
+                String joinDate = memberData[7];
+
+                member = new Member(id, name, gender, age, address, phoneNumber, birthDate, joinDate);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                bufferedReader.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return member;
+
+
     }
 
     @Override
