@@ -1,5 +1,8 @@
 package com.kopo.library.domain;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -20,18 +23,18 @@ public class Member {
     public Member() {
     }
 
-//    // 1. Memory 모드 일때 - 회원 삽입, age처리
-//    public Member(String name, GenderStatus gender, String address, String phoneNumber, String birthDate) {
-//        this.id = ID_GENERATOR.getAndIncrement();
-//        this.name = name;
-//        this.gender = gender;
-//        this.age = String.valueOf(Period.between(LocalDate.now(), LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("yyyy/MM/dd")))
-//                .getYears() * -1);
-//        this.address = address;
-//        this.phoneNumber = phoneNumber;
-//        this.birthDate = birthDate;
-//        this.joinDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-//    }
+    // 1. Memory 모드 일때 - 회원 삽입, age처리
+    public Member(String name, GenderStatus gender, String address, String phoneNumber, String birthDate) {
+        this.id = ID_GENERATOR.getAndIncrement();
+        this.name = name;
+        this.gender = gender;
+        this.age = String.valueOf(Period.between(LocalDate.now(), LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("yyyy/MM/dd")))
+                .getYears() * -1);
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+        this.joinDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+    }
 //
 //    // 1. Memory 모드에서 - Id 사용해서 수정, 삭제 해줄 때, age처리
 //    public Member(Long id, String name, GenderStatus gender, String address, String phoneNumber, String birthDate) {
@@ -70,13 +73,13 @@ public class Member {
     }
 
     // 3. DB 모드일때 - 회원 삽입
-    public Member(String name, GenderStatus gender, String address, String phoneNumber, String birthDate) {
-        this.name = name;
-        this.gender = gender;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.birthDate = birthDate;
-    }
+//    public Member(String name, GenderStatus gender, String address, String phoneNumber, String birthDate) {
+//        this.name = name;
+//        this.gender = gender;
+//        this.address = address;
+//        this.phoneNumber = phoneNumber;
+//        this.birthDate = birthDate;
+//    }
 
 
     public Long getId() {

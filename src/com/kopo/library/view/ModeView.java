@@ -2,6 +2,7 @@ package com.kopo.library.view;
 
 import com.kopo.library.repository.BookRepoDbImpl;
 import com.kopo.library.repository.BorrowRepoDbImpl;
+import com.kopo.library.repository.MemberRepoCsvImpl;
 import com.kopo.library.repository.MemberRepoDbImpl;
 import com.kopo.library.service.BookServiceImpl;
 import com.kopo.library.service.BorrowServiceImpl;
@@ -36,7 +37,7 @@ public class ModeView {
 //            loanService = new LoanServiceImpl(new LoanDAOImpl());
         }
         else if (mode == 2) {
-//            memberService = new MemberServiceImpl(new MemberCsvDAOImpl());
+            MainView.memberService = new MemberServiceImpl(new MemberRepoCsvImpl());
 //            bookService = new BookServiceImpl(new BookCsvDAOImpl());
 //            loanService = new LoanServiceImpl(new LoanCsvDAOImpl());
         }
