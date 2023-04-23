@@ -121,21 +121,6 @@ public class BorrowRepoDbImpl implements BorrowRepository {
     }
 
     @Override
-    public void insertBook(Borrow borrow) {
-
-    }
-
-    @Override
-    public void updateBook(Borrow borrow) {
-
-    }
-
-    @Override
-    public void deleteBook(Borrow borrow) {
-
-    }
-
-    @Override
     public Borrow findById(Long id) {
         return null;
     }

@@ -27,16 +27,6 @@ public interface BorrowRepository<T> {
 
 
 
-    // 삽입
-    void insertBook(Borrow borrow);
-
-    // 수정
-    void updateBook(Borrow borrow);
-
-    // 삭제
-    void deleteBook(Borrow borrow);
-
-
     // 조회
     Borrow findById(Long id);
     Borrow findByTitle(String title);
