@@ -1,5 +1,8 @@
 package com.kopo.library.domain;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -9,7 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * 도서관 회원 관리
  */
 public class Member {
-    private static AtomicLong ID_GENERATOR = new AtomicLong(1);
+    private static AtomicLong ID_GENERATOR = new AtomicLong(rowLength());
 
     private Long id;
     private String name;
@@ -22,6 +25,26 @@ public class Member {
 
     public Member() {
     }
+
+    /**
+     * csv모드일때, id값이 1부터 증가하면 끄고 킬때마다 중복되므로
+     * 파일의 행 개수를 세고, 그 다음부터 1씩 증가하게 한다.
+     * @return
+     */
+    public static Long rowLength() {
+        Long count = -1L;
+
+        try {
+            Path file = Paths.get("member.csv");
+
+            count = Files.lines(file).count();
+            System.out.println("Total Lines: " + count);
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        return count;
+    }
+
 
     // 1. Memory 모드 일때 - 회원 삽입, age처리
     public Member(String name, GenderStatus gender, String address, String phoneNumber, String birthDate) {
