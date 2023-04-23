@@ -7,7 +7,6 @@ import com.kopo.library.view.MainView;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.JarOutputStream;
 
 public class BorrowRepoDbImpl implements BorrowRepository {
 
@@ -67,14 +66,11 @@ public class BorrowRepoDbImpl implements BorrowRepository {
                 boolean isPossibleExtend = resultSet.getBoolean("isPossibleExtend");
                 String startDate = resultSet.getString("startDate");
                 String endDate = resultSet.getString("endDate");
-                boolean isPossibleBorrow = resultSet.getBoolean("isPossibleBorrow");
                 String title = resultSet.getString("title");
                 String name = resultSet.getString("name");
 
-                System.out.println("borrowId \t isPossibleExtend \t startDate \t endDate " +
-                        "\t isPossibleBorrow" +
-                        "\t title" +
-                        " \t name");
+                System.out.println(borrowId + "\t" + isPossibleExtend + "\t" + startDate + "\t" + endDate
+                        + "\t" + title + "\t" + name);
 
 //                Borrow borrow = new borrow(borrowId, isPossibleBorrow, isPossibleExtend, startDate, endDate, title, name);
 //                borrows.add(borrow);

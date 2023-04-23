@@ -63,7 +63,8 @@ public class BorrowView {
                            e.printStackTrace();
                            break;
                     }
-                    bookService.isPossibleBorrowChange(false, bookId); // BOOK의 대출 가능 여부 컬럼 F(불가)로 변경
+                    // BOOK의 대출 가능 여부 컬럼 false(불가)로 변경
+                    bookService.isPossibleBorrowChange(false, bookId);
                     break;
 //                case ("3"): // 대출연장
 //                    loanService.inquiryExtenstionableLoanData(); // 대출 기한 연장 가능 도서 목록 조회

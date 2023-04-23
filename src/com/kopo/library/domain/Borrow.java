@@ -8,33 +8,28 @@ public class Borrow {
     private Long borrowId;
     private Long memberId;
     private Long bookId;
-    private boolean isPossibleBorrow;
     private boolean isPossibleExtend;
     private String startDate;
     private String endDate;
 
-    public Borrow(Long borrowId, Long memberId, Long bookId, boolean isPossibleBorrow, boolean isPossibleExtend, String startDate, String endDate) {
+    public Borrow(Long borrowId, Long memberId, Long bookId, boolean isPossibleExtend, String startDate, String endDate) {
         this.borrowId = borrowId;
         this.memberId = memberId;
         this.bookId = bookId;
-        this.isPossibleBorrow = isPossibleBorrow;
         this.isPossibleExtend = isPossibleExtend;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public Borrow(Long memberId, Long bookId, boolean isPossibleBorrow, boolean isPossibleExtend) {
+    public Borrow(Long memberId, Long bookId, boolean isPossibleExtend) {
         this.memberId = memberId;
         this.bookId = bookId;
-        this.isPossibleBorrow = isPossibleBorrow;
         this.isPossibleExtend = isPossibleExtend;
     }
 
     public Borrow(Long bookId, Long memberId) {
-        this.memberId = memberId;
         this.bookId = bookId;
-        this.isPossibleBorrow = false;
-        this.isPossibleExtend = true;
+        this.memberId = memberId;
     }
 
     public Long getBorrowId() {
@@ -59,14 +54,6 @@ public class Borrow {
 
     public void setBookId(Long bookId) {
         this.bookId = bookId;
-    }
-
-    public boolean isPossibleBorrow() {
-        return isPossibleBorrow;
-    }
-
-    public void setPossibleBorrow(boolean possibleBorrow) {
-        isPossibleBorrow = possibleBorrow;
     }
 
     public boolean isPossibleExtend() {
