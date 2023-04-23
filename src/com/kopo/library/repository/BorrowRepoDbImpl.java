@@ -92,7 +92,7 @@ public class BorrowRepoDbImpl implements BorrowRepository {
     @Override
     public void insertBorrow(Borrow borrow) {
         
-        String query = "INSERT INTO borrow(borrowId, memberId, bookId)"
+        String query = "INSERT INTO borrow(borrowId, bookId, memberId)"
                 + "VALUES(BORROW_ID_SEQ.NEXTVAL, ?, ?)";
 
         Long bookId = borrow.getBookId();

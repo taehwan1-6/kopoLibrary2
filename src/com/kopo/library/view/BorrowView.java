@@ -57,7 +57,12 @@ public class BorrowView {
                     long memberId = Long.parseLong(userInput);
 
                     Borrow borrow = new Borrow(bookId, memberId);
-                    borrowService.insertBorrow(borrow);
+                    try {
+                        borrowService.insertBorrow(borrow);
+                    } catch (Exception e) {
+                           e.printStackTrace();
+                           break;
+                    }
                     bookService.isPossibleBorrowChange(false, bookId); // BOOK의 대출 가능 여부 컬럼 F(불가)로 변경
                     break;
 //                case ("3"): // 대출연장

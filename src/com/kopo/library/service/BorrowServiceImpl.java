@@ -28,7 +28,7 @@ public class BorrowServiceImpl implements BorrowService{
 
     @Override
     public void insertBorrow(Borrow borrow) {
-
+        borrowRepository.insertBorrow(borrow);
     }
 
     @Override
