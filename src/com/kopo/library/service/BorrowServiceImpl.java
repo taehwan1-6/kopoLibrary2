@@ -1,5 +1,6 @@
 package com.kopo.library.service;
 
+import com.kopo.library.domain.Book;
 import com.kopo.library.domain.Borrow;
 import com.kopo.library.repository.BookRepository;
 import com.kopo.library.repository.BorrowRepository;
@@ -15,12 +16,13 @@ public class BorrowServiceImpl implements BorrowService{
     }
 
     @Override
-    public List<Borrow> findAllBorrowAble() {
-        return null;
+    public List<Book> findAllBorrowAble() {
+        return borrowRepository.findAllBorrowAble();
     }
 
     @Override
     public List<Borrow> findAllBorrow() {
+        borrowRepository.findAllBorrow();
         return null;
     }
 
@@ -35,7 +37,7 @@ public class BorrowServiceImpl implements BorrowService{
     }
 
     @Override
-    public void updateBorrowExtends(Borrow borrow) {
+    public void updateBorrowExtend(Borrow borrow) {
 
     }
 

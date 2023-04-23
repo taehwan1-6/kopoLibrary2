@@ -4,12 +4,12 @@ import com.kopo.library.domain.Borrow;
 
 import java.util.List;
 
-public interface BorrowService {
+public interface BorrowService<T> {
     // 대출 가능한 도서 목록 조회
-    List<Borrow> findAllBorrowAble();
+    List<T> findAllBorrowAble();
 
     // 대출된 도서 목록 조회
-    List<Borrow> findAllBorrow();
+    List<T> findAllBorrow();
 
 
     // 도서 대출 기능(삽입)
@@ -20,7 +20,7 @@ public interface BorrowService {
 
 
     // 반납 기한 연장(수정)
-    void updateBorrowExtends(Borrow borrow);
+    void updateBorrowExtend(Borrow borrow);
 
 
 

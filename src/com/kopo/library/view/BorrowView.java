@@ -14,23 +14,26 @@ public class BorrowView {
     }
 
     public void view() {
-        BorrowService loanService = MainView.borrowService;
+        BorrowService borrowService = MainView.borrowService;
         BookService bookService = MainView.bookService;
         MemberService memberService = MainView.memberService;
         Scanner scanner = MainView.scanner;
 
 
         while (true) {
-            System.out.println("[0]뒤로 \t [1]대출현황조회 \t [2]도서대출 \t [3]대출연장 \t [4]도서반납");
+            System.out.println("[0]뒤로 \t [1]대출 가능한 도서 조회 \t [2]대출된 도서 조회 \t [3]도서대출 \t [4]대출연장 \t [5]도서반납");
 
             String userInput = scanner.nextLine();
 
             switch (userInput) {
                 case ("0"): // 뒤로
                     return;
-//                case ("1"): // 대출현황조회
-//                    loanService.inquiryLoanData();
-//                    break;
+                case ("1"): // 대출 가능한 도서 조회
+                    System.out.println(borrowService.findAllBorrowAble());
+                    break;
+                case ("2"): // 대출된 도서 조회
+                    borrowService.findAllBorrow();
+                    break;
 //                case ("2"): // 도서대출
 //                    System.out.println("대출 가능 도서 목록");
 //                    System.out.println(
