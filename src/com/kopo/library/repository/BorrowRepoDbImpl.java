@@ -50,10 +50,9 @@ public class BorrowRepoDbImpl implements BorrowRepository {
     public List<Borrow> findAllBorrow() {
         List<Borrow> borrows = new ArrayList<>();
 
-        System.out.println("borrowId \t isPossibleExtend \t startDate \t endDate " +
-                "\t isPossibleBorrow \t title \t name");
+        System.out.println("borrowId \t isPossibleExtend \t startDate \t\t\t\t endDate " +
+                "\t\t \t\t title \t\t name");
         String query = "SELECT borrowId, isPossibleExtend, startDate, endDate,  "
-                + "(SELECT isPossibleBorrow FROM BOOK WHERE BOOK.bookId = borrow.bookId and Book.isPossibleBorrow IN 'false') AS isPossibleBorrow, "
                 + "(SELECT TITLE FROM BOOK WHERE BOOK.bookId = borrow.bookId) AS title, "
                 + "(SELECT NAME FROM MEMBER WHERE MEMBER.Id = borrow.memberId) AS name "
                 + "FROM borrow ORDER BY endDate";
@@ -69,8 +68,8 @@ public class BorrowRepoDbImpl implements BorrowRepository {
                 String title = resultSet.getString("title");
                 String name = resultSet.getString("name");
 
-                System.out.println(borrowId + "\t" + isPossibleExtend + "\t" + startDate + "\t" + endDate
-                        + "\t" + title + "\t" + name);
+                System.out.println(borrowId + "\t\t\t\t" + isPossibleExtend + "\t\t" + "\t" + startDate + "\t\t" + endDate
+                        + "\t\t" + title + "\t" + name);
 
 //                Borrow borrow = new borrow(borrowId, isPossibleBorrow, isPossibleExtend, startDate, endDate, title, name);
 //                borrows.add(borrow);
